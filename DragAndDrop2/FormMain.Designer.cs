@@ -100,14 +100,18 @@
             this.pictureBoxSourceDrag.Size = new System.Drawing.Size(215, 167);
             this.pictureBoxSourceDrag.TabIndex = 0;
             this.pictureBoxSourceDrag.TabStop = false;
+            this.pictureBoxSourceDrag.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBoxSourceDrag_MouseDown);
             // 
             // panelTargetDrop
             // 
+            this.panelTargetDrop.AllowDrop = true;
             this.panelTargetDrop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.panelTargetDrop.Location = new System.Drawing.Point(429, 17);
             this.panelTargetDrop.Name = "panelTargetDrop";
             this.panelTargetDrop.Size = new System.Drawing.Size(306, 167);
             this.panelTargetDrop.TabIndex = 1;
+            this.panelTargetDrop.DragDrop += new System.Windows.Forms.DragEventHandler(this.panelTargetDrop_DragDrop);
+            this.panelTargetDrop.DragEnter += new System.Windows.Forms.DragEventHandler(this.panelTargetDrop_DragEnter);
             // 
             // FormMain
             // 

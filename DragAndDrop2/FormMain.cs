@@ -27,7 +27,8 @@ namespace DragAndDrop2
         }
         private void textBoxTargetDrop_DragEnter(object sender, DragEventArgs e)
         {
-            e.Effect = DragDropEffects.Copy;
+            if (e.Data.GetDataPresent(DataFormats.Text))
+                e.Effect = DragDropEffects.Copy;
         }
 
         private void textBoxTargetDrop_DragDrop(object sender, DragEventArgs e)
@@ -36,6 +37,22 @@ namespace DragAndDrop2
             textBoxTargetDrop.Text = s;
         }
 
-     
+        private void pictureBoxSourceDrag_MouseDown(object sender, MouseEventArgs e)
+        {
+            pictureBoxSourceDrag.DoDragDrop(pictureBoxSourceDrag.Image, DragDropEffects.Copy);
+        }
+
+        private void panelTargetDrop_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.Bitmap))
+                e.Effect = DragDropEffects.All;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void panelTargetDrop_DragDrop(object sender, DragEventArgs e)
+        {
+            panelTargetDrop.BackgroundImage = (Image)e.Data.GetData(DataFormats.Bitmap);
+        }
     }
 }
