@@ -54,5 +54,38 @@ namespace DragAndDrop2
         {
             panelTargetDrop.BackgroundImage = (Image)e.Data.GetData(DataFormats.Bitmap);
         }
+
+        private void listViewSourceDrag_MouseDown(object sender, MouseEventArgs e)
+        {
+            int indexSource = listViewSourceDrag.Items.IndexOf(listViewSourceDrag.GetItemAt(e.X, e.Y));
+            ///MessageBox.Show(index.ToString());
+            listViewSourceDrag.DoDragDrop(indexSource.ToString(), DragDropEffects.All);
+        }
+
+        private void listBoxTargetDrop_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.All;
+        }
+
+        private void listBoxTargetDrop_DragDrop(object sender, DragEventArgs e)
+        {
+            int indexTarget = Convert.ToInt32(e.Data.GetData(DataFormats.Text));
+            // MessageBox.Show(indexTarget.ToString());
+            listBoxTargetDrop.Items.Add(listViewSourceDrag.Items[indexTarget].Text);
+            panelTargetDrop.BackgroundImage = imageListSourceDrag.Images[indexTarget];
+
+        }
+
+        private void panel2_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = DragDropEffects.Copy;
+        }
+
+        private void panel2_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop);
+            //MessageBox.Show(fileName[0]);
+            pictureBoxSourceDrag.Load(fileName[0]);
+        }
     }
 }
